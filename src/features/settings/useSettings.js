@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
-import { getSettings } from "../services/apiSettings";
+import { getSettings } from "../../services/apiSettings";
 
 export function useSettings() {
     const {
