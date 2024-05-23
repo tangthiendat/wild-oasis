@@ -5,18 +5,18 @@ import { login as loginApi } from "../../services/apiAuth";
 import toast from "react-hot-toast";
 
 export function useLogin() {
-    const navigate = useNavigate();
-    const queryClient = useQueryClient();
-    const { mutate: login, isPending: isLoading } = useMutation({
-        mutationFn: ({ email, password }) => loginApi({ email, password }),
-        onSuccess: (user) => {
-            queryClient.setQueryData(["user"], user.user);
-            navigate("/dashboard", { replace: true });
-        },
-        onError: (error) => {
-            console.error("ERROR", error);
-            toast.error("Provided credentials are invalid.");
-        },
-    });
-    return { login, isLoading };
+   const navigate = useNavigate();
+   const queryClient = useQueryClient();
+   const { mutate: login, isPending: isLoading } = useMutation({
+      mutationFn: ({ email, password }) => loginApi({ email, password }),
+      onSuccess: (data) => {
+         queryClient.setQueryData(["user"], data.user);
+         navigate("/dashboard", { replace: true });
+      },
+      onError: (error) => {
+         console.error("ERROR", error);
+         toast.error("Provided credentials are invalid.");
+      },
+   });
+   return { login, isLoading };
 }
